@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 
-const cached = {};
+// const cached = {};
+// function registerModel(app, model) {
+//   model = model.default || model;
+//   if (!cached[model.namespace]) {
+//     app.model(model);
+//     cached[model.namespace] = 1;
+//   }
+// }
+
+//wyg 重写model是否需要注册的方法
 function registerModel(app, model) {
   model = model.default || model;
-  if (!cached[model.namespace]) {
+  if (app._models.findIndex(m => m.namespace === model.namespace) === -1) {
     app.model(model);
-    cached[model.namespace] = 1;
   }
 }
 
